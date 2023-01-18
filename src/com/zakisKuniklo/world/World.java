@@ -11,8 +11,9 @@ import com.zakiskuniklo.main.Game;
 
 public class World {
 
-	private Tile[] tiles;
+	public static Tile[] tiles;
 	public static int width,height;
+	public static final int tile_size = 16;
 	
 	public World(String path) {
 		try {
@@ -32,7 +33,7 @@ public class World {
 						tiles[xx+(yy*width)] = new FloorTile(Tile.Tile_Floor,xx*16,yy*16);
 					}else if(pixela == 0xffffffff) {
 						//wall
-						tiles[xx+(yy*width)] = new FloorTile(Tile.Tile_Wall,xx*16,yy*16);
+						tiles[xx+(yy*width)] = new WallTile(Tile.Tile_Wall,xx*16,yy*16);
 					}else if(pixela == 0xff101edb) {
 						//player
 						Game.player.setX(xx*16);
@@ -56,6 +57,25 @@ public class World {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean isFree(int xnext, int ynext){
+		int x1 = xnext / tile_size;
+		int y1 = ynext / tile_size;
+		
+		int x2 = (xnext + tile_size -1) / tile_size;
+		int y2 = ynext / tile_size;
+		
+		int x3 = xnext / tile_size;
+		int y3 = (ynext + tile_size -1) / tile_size;
+		
+		int x4 = (xnext + tile_size -1) / tile_size;
+		int y4 = (ynext + tile_size -1) / tile_size;
+		
+		return !(tiles[x1 + (y1*World.width)] instanceof WallTile ||
+				 tiles[x2 + (y2*World.width)] instanceof WallTile ||
+				 tiles[x3 + (y3*World.width)] instanceof WallTile ||
+				 tiles[x4 + (y4*World.width)] instanceof WallTile);
 	}
 	
 	public void render(Graphics g) {
