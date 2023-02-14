@@ -40,7 +40,9 @@ public class World {
 						Game.player.setY(yy*16);
 					}else if(pixela == 0xffdb1038) {
 						//Enemy
-						Game.entities.add(new Enemy(xx*16,yy*16,16,16,Entity.ENEMY1_EN));
+						Enemy en = new Enemy(xx*16,yy*16,16,16,Entity.ENEMY1_EN);
+						Game.entities.add(en);
+						Game.enemies.add(en);
 					}else if(pixela == 0xff3f2a0b) {
 						//weapon
 						Game.entities.add(new Weapon(xx*16,yy*16,16,16,Entity.WEAPON_EN));

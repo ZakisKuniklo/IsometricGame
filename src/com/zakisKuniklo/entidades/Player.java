@@ -10,7 +10,7 @@ import com.zakiskuniklo.main.Game;
 public class Player extends Entity{
 	
 	public boolean right, left, up, down;
-	public int speed = 1;
+	public int speed = 2;
 	public int dir = 1;
 	
 	private int frames = 0, maxFrames = 5, index =1, maxIndex=4;
